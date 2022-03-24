@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="asignacion_laboratorios" id="F508E7A4-D878-E836-EE9C-13EC6D502FFF" version="3.5">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 10:15:57 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>F508E7A4-D878-E836-EE9C-13EC6D502FFF</designId>
+</OSDM_Design>

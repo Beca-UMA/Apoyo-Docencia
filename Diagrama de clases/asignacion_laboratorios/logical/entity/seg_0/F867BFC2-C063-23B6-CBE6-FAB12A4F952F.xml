@@ -1,0 +1,299 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F867BFC2-C063-23B6-CBE6-FAB12A4F952F" name="Solicitud">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:47:03 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID" id="8463FF0B-D0C5-325D-45DE-668885EC6477">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:47:14 UTC</createdTime>
+<commentInRDBMS><![CDATA[Identificador de la solicitud]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Tipo" id="34BD6741-474A-1255-199E-5D1037BC25FA">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:47:48 UTC</createdTime>
+<commentInRDBMS><![CDATA[Tipo de solciitud: Reserva semanal, reserva de listado de días o cancelación ]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Preferencia" id="3CC9A57D-9E90-7978-5709-06E5A063339E">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:49:24 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indicar si la reserva del aula indicada es la preferencia o la alternativa ]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Característica" id="993B59A2-C1B4-A757-F846-B6654BF4C3E3">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:51:35 UTC</createdTime>
+<commentInRDBMS><![CDATA[Docencia reglada]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Localizacion" id="1C63C08C-86A6-862D-6AB9-89C0D6EC1624">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:53:35 UTC</createdTime>
+<commentInRDBMS><![CDATA[Preferencia de localización del aula (CTE, ING o cualquiera)]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Especificacion_aula" id="594E2537-A17D-1343-7D04-4C0633F0C74C">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:55:00 UTC</createdTime>
+<commentInRDBMS><![CDATA[En caso de concretar la localización, especifica el aula preferente]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Num_alumnos" id="CF3F7430-2BE3-0AC1-CAB6-305BF58337DB">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:59:18 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indica el numero de alumnos que necesita el profesor	]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Sistema_Operativo" id="6033D524-F23F-D433-29B1-8F4FF47DA570">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:05:39 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indica el sistema operativo que el profesor requiere que tenga el aula para impartir su clase (Windows, MacOS, Indiferente)]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Especializacion" id="51A375A2-49F3-2946-D26B-58785875619C">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:07:17 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indica si el aula debe tener alguna especializacion de material (Arduino, Redes, GPU, ninguno)]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Fecha_inicio" id="2CAC6FFA-7476-4E93-E732-34A829E3F25D">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:36:01 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Fecha_fin" id="3DE52794-0141-B0E5-D404-591CA301ACB1">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:36:16 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Hora_inicio" id="5D71C800-59B9-5529-CCFB-5FB17F01C303">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:36:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indicar la hora a la que inicia la reserva]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Hora_fin" id="57554AA6-113D-F4B5-7033-B76C546671AF">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:41:13 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indica la hora a la que finaliza la reserva]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Asignatura" id="AEF2ED09-698A-B34E-4009-2A2BAE041987">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:59:21 UTC</createdTime>
+<generatorID>41A7E1B8-C463-1F36-9B5F-A23FB57C61CD</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<referedAttribute>9A594D25-EFB7-38D3-A498-53D0ED1D2BA3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Profesor_Solicitante" id="D573EF30-9D74-29F9-8B70-275E8AD922BE">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 13:03:14 UTC</createdTime>
+<generatorID>CEDF335F-A15B-4147-7307-3CF576986D6C</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<referedAttribute>24F9C2B6-A5DE-AB70-DCEA-4003489CE68E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Profesor_Encargado" id="1DB0A53F-3506-199E-102E-DE4B21730D5E">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 13:04:25 UTC</createdTime>
+<generatorID>8F7927C8-9A9E-68FD-DB2C-65F48D77ACD2</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>24F9C2B6-A5DE-AB70-DCEA-4003489CE68E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Aula_Loc" id="5CEC8C98-57A9-0A2E-FC0C-E5D448DAB411">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 13:07:57 UTC</createdTime>
+<generatorID>A83BADC2-3FD5-E3E7-D177-92EFAF159617</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>4DFB49FA-DC0D-F1D3-6C2F-DAE11295CEB4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Num_Aula" id="D73A532F-BB0C-639D-6914-BEB27E47F265">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 13:14:46 UTC</createdTime>
+<generatorID>A83BADC2-3FD5-E3E7-D177-92EFAF159617</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>6E34F749-CF2A-57DF-073A-EC3DE8E3C43E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="09DC96A2-AE4A-462E-FE2B-F139E7BD1F0D" name="Solicitud PK">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:17:06 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>8463FF0B-D0C5-325D-45DE-668885EC6477</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

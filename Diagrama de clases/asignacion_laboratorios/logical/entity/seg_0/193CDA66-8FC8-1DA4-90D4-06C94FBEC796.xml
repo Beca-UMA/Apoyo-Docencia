@@ -1,0 +1,120 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="193CDA66-8FC8-1DA4-90D4-06C94FBEC796" name="Aula">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:46:41 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Especificación " id="B1C9C512-881B-6ED8-21CD-D838FB2BF78C">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:10:09 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Localizacion" id="4DFB49FA-DC0D-F1D3-6C2F-DAE11295CEB4">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:11:18 UTC</createdTime>
+<commentInRDBMS><![CDATA[Ubicacion del aula]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Capacidad" id="2E4DC45F-FFAD-976F-DB2E-E1B53EBCD722">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:11:35 UTC</createdTime>
+<commentInRDBMS><![CDATA[Número total de alumnos que puede albergar el aula]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Sistema_Operativo" id="535FB86F-80C0-8410-5979-76E0755656EC">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:13:57 UTC</createdTime>
+<commentInRDBMS><![CDATA[Sistema operativo que tiene el aula]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Especialización" id="0AD1DA66-0A24-5D07-7BB9-9F816F49FC0E">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:14:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indica la especialización, si procede, del aula]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Num_Aula" id="6E34F749-CF2A-57DF-073A-EC3DE8E3C43E">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:15:48 UTC</createdTime>
+<commentInRDBMS><![CDATA[Indica el número del aula]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="834B8D89-20C1-52DB-CE1C-B2DA6B180F1D" name="Aula PK">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:16:38 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4DFB49FA-DC0D-F1D3-6C2F-DAE11295CEB4</attributeRef>
+<attributeRef>6E34F749-CF2A-57DF-073A-EC3DE8E3C43E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

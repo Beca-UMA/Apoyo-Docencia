@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="84985990-D814-5D1B-6645-A22C00C9B600" name="Departamento">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:32:14 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Nombre" id="58C6D483-30F6-CD35-81B3-75739F896ED9">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:32:28 UTC</createdTime>
+<commentInRDBMS><![CDATA[Nombre del departamento]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="52583691-E624-58C3-63B2-A29FE5017B50" name="Departamento PK">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:32:42 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>58C6D483-30F6-CD35-81B3-75739F896ED9</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

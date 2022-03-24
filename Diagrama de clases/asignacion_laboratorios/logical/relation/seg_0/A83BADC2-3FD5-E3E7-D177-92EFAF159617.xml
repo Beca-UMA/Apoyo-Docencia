@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Solicitud_aula" directorySegmentName="seg_0" id="A83BADC2-3FD5-E3E7-D177-92EFAF159617">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 13:07:57 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<sourcePk>834B8D89-20C1-52DB-CE1C-B2DA6B180F1D</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>asociada a</nameOnSource>
+<nameOnTarget>asigna</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>193CDA66-8FC8-1DA4-90D4-06C94FBEC796</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>F867BFC2-C063-23B6-CBE6-FAB12A4F952F</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

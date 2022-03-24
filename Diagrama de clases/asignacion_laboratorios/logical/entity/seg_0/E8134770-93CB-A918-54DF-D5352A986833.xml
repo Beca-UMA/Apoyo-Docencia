@@ -1,0 +1,78 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E8134770-93CB-A918-54DF-D5352A986833" name="Subgrupo">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:44:47 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Curso" id="7D0C23C5-5899-F837-4C4B-F5E6FC3C17AC">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:56:04 UTC</createdTime>
+<generatorID>246BB1D9-3BDC-D5D1-FA06-52DF0B00D9BE</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<referedAttribute>29C6A82C-5BD4-D6EC-B401-177805281596</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypeScale>1</dataTypeScale>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Letra" id="E8668923-AFD6-39D2-E726-599FE52923C5">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:56:04 UTC</createdTime>
+<generatorID>246BB1D9-3BDC-D5D1-FA06-52DF0B00D9BE</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<referedAttribute>93A2EA97-C90C-13A4-4F17-30DFA60ECC6C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Subgrupo" id="FE10997B-BCA9-0AB4-0A37-BF465A77C0FE">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:51:21 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="DFE49D20-9440-40E0-C9E7-1643B51FB8B8" name="Subgrupo PK">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:55:38 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>7D0C23C5-5899-F837-4C4B-F5E6FC3C17AC</attributeRef>
+<attributeRef>E8668923-AFD6-39D2-E726-599FE52923C5</attributeRef>
+<attributeRef>FE10997B-BCA9-0AB4-0A37-BF465A77C0FE</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

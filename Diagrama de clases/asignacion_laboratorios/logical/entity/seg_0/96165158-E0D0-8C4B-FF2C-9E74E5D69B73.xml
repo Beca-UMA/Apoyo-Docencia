@@ -1,0 +1,88 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="96165158-E0D0-8C4B-FF2C-9E74E5D69B73" name="Profesor">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 10:19:09 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Nombre" id="A44F4260-C729-A571-0064-19FFEB9BE281">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:43:43 UTC</createdTime>
+<commentInRDBMS><![CDATA[Nombre completo del profesor]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Telefono" id="FE0B026C-A1EB-807A-26FE-F9CAD2BAB45C">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:45:19 UTC</createdTime>
+<commentInRDBMS><![CDATA[Teléfono de contacto]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>9</dataTypeSize>
+<ownDataTypeParameters>9,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Email" id="24F9C2B6-A5DE-AB70-DCEA-4003489CE68E">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 11:45:44 UTC</createdTime>
+<commentInRDBMS><![CDATA[Correo electrónico de contatco]]></commentInRDBMS>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nombre1" id="AA0477E6-C699-6015-CA42-E95C8C793DEA">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 13:02:34 UTC</createdTime>
+<generatorID>04F913FC-5F83-9837-989D-8A643EE8A7B6</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<referedAttribute>58C6D483-30F6-CD35-81B3-75739F896ED9</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B33747E7-2361-4BC1-ED51-01912B266B8D" name="Profesor PK">
+<createdBy>victo</createdBy>
+<createdTime>2022-03-24 12:28:40 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>24F9C2B6-A5DE-AB70-DCEA-4003489CE68E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
