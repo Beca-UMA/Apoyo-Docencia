@@ -42,6 +42,21 @@
 <dataTypeSize>32</dataTypeSize>
 <ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="ID" id="110FBA03-4DB7-176B-9E40-5F4D2C3CEE44">
+<createdBy>Ruben</createdBy>
+<createdTime>2022-03-25 08:40:52 UTC</createdTime>
+<generatorID>A184401B-8943-0EBA-6751-7D9F328F3B35</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<referedAttribute>9A594D25-EFB7-38D3-A498-53D0ED1D2BA3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="0CB640DF-39A1-9879-CA4D-616F2235A906" name="Grupo PK">
@@ -55,6 +70,7 @@
 <usedAttributes>
 <attributeRef>29C6A82C-5BD4-D6EC-B401-177805281596</attributeRef>
 <attributeRef>93A2EA97-C90C-13A4-4F17-30DFA60ECC6C</attributeRef>
+<attributeRef>110FBA03-4DB7-176B-9E40-5F4D2C3CEE44</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

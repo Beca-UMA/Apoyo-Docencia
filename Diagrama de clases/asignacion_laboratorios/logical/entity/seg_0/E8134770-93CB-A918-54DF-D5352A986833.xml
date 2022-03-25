@@ -28,7 +28,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypeScale>1</dataTypeScale>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,,1</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Letra" id="E8668923-AFD6-39D2-E726-599FE52923C5">
 <createdBy>victo</createdBy>
@@ -43,7 +43,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>32</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Subgrupo" id="FE10997B-BCA9-0AB4-0A37-BF465A77C0FE">
 <createdBy>victo</createdBy>
@@ -58,6 +58,21 @@
 <dataTypeSize>32</dataTypeSize>
 <ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="ID" id="8F9A7FCE-D01E-423A-D37E-DA3E54D82B16">
+<createdBy>Ruben</createdBy>
+<createdTime>2022-03-25 08:40:56 UTC</createdTime>
+<generatorID>246BB1D9-3BDC-D5D1-FA06-52DF0B00D9BE</generatorID>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<referedAttribute>110FBA03-4DB7-176B-9E40-5F4D2C3CEE44</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="DFE49D20-9440-40E0-C9E7-1643B51FB8B8" name="Subgrupo PK">
@@ -71,6 +86,7 @@
 <usedAttributes>
 <attributeRef>7D0C23C5-5899-F837-4C4B-F5E6FC3C17AC</attributeRef>
 <attributeRef>E8668923-AFD6-39D2-E726-599FE52923C5</attributeRef>
+<attributeRef>8F9A7FCE-D01E-423A-D37E-DA3E54D82B16</attributeRef>
 <attributeRef>FE10997B-BCA9-0AB4-0A37-BF465A77C0FE</attributeRef>
 </usedAttributes>
 </identifier>

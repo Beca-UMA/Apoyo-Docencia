@@ -23,7 +23,21 @@
 <engineerTo>
 <item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
 </engineerTo>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID" id="6630BADF-1C07-D44B-C9BC-70DDF7E4664A">
+<createdBy>Ruben</createdBy>
+<createdTime>2022-03-25 08:35:15 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
@@ -37,7 +51,7 @@
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>58C6D483-30F6-CD35-81B3-75739F896ED9</attributeRef>
+<attributeRef>6630BADF-1C07-D44B-C9BC-70DDF7E4664A</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

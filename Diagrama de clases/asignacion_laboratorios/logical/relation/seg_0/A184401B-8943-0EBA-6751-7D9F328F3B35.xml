@@ -6,12 +6,13 @@
 <engineerTo>
 <item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
 </engineerTo>
-<identifying>false</identifying>
+<sourcePk>8472E9FB-652E-A65F-E022-87F1E5F106A5</sourcePk>
+<identifying>true</identifying>
 <nameOnSource>tiene</nameOnSource>
 <nameOnTarget>tiene</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
-<sourceCardinality>*</sourceCardinality>
+<sourceCardinality>1</sourceCardinality>
 <sourceEntity>87D56A1C-2A52-B9D4-91A6-0DC8E1292EB4</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
 <targetEntity>B4E7A2A1-30E8-8807-5D77-57AE92E3D5CC</targetEntity>

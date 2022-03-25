@@ -58,16 +58,17 @@
 <dataTypeSize>32</dataTypeSize>
 <ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Nombre1" id="AA0477E6-C699-6015-CA42-E95C8C793DEA">
-<createdBy>victo</createdBy>
-<createdTime>2022-03-24 13:02:34 UTC</createdTime>
+<Attribute name="ID" id="C822D725-BB00-48E6-1405-6502F8BA5679">
+<createdBy>Ruben</createdBy>
+<createdTime>2022-03-25 08:35:29 UTC</createdTime>
 <generatorID>04F913FC-5F83-9837-989D-8A643EE8A7B6</generatorID>
 <ownerDesignName>asignacion_laboratorios</ownerDesignName>
 <engineerTo>
 <item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
 </engineerTo>
-<referedAttribute>58C6D483-30F6-CD35-81B3-75739F896ED9</referedAttribute>
-<use>0</use>
+<referedAttribute>6630BADF-1C07-D44B-C9BC-70DDF7E4664A</referedAttribute>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>

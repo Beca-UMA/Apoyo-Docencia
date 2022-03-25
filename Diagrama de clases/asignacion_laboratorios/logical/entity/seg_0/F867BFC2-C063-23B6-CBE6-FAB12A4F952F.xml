@@ -15,6 +15,18 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="key" id="FD687FE7-F394-CE31-FD1D-4AFC0179B8A6">
+<createdBy>Ruben</createdBy>
+<createdTime>2022-03-25 08:43:39 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 <Attribute name="ID" id="8463FF0B-D0C5-325D-45DE-668885EC6477">
 <createdBy>victo</createdBy>
 <createdTime>2022-03-24 11:47:14 UTC</createdTime>
@@ -36,7 +48,6 @@
 <engineerTo>
 <item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -51,7 +62,6 @@
 <engineerTo>
 <item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -216,7 +226,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>32</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="ID_Profesor_Solicitante" id="D573EF30-9D74-29F9-8B70-275E8AD922BE">
 <createdBy>victo</createdBy>
@@ -231,7 +241,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>32</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="ID_Profesor_Encargado" id="1DB0A53F-3506-199E-102E-DE4B21730D5E">
 <createdBy>victo</createdBy>
@@ -247,7 +257,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>32</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="ID_Aula_Loc" id="5CEC8C98-57A9-0A2E-FC0C-E5D448DAB411">
 <createdBy>victo</createdBy>
@@ -263,7 +273,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>32</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="Num_Aula" id="D73A532F-BB0C-639D-6914-BEB27E47F265">
 <createdBy>victo</createdBy>
@@ -279,7 +289,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>32</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -292,7 +302,21 @@
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
+<attributeRef>FD687FE7-F394-CE31-FD1D-4AFC0179B8A6</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="ACD23329-02AC-B401-AE48-481FA7ED605B" name="Unique_Solicitud">
+<createdBy>Ruben</createdBy>
+<createdTime>2022-03-25 08:49:07 UTC</createdTime>
+<ownerDesignName>asignacion_laboratorios</ownerDesignName>
+<engineerTo>
+<item key="CD76598E-B248-F519-10F8-05E348DE0085" value="true"/>
+</engineerTo>
+<newElementsIDs>8463FF0B-D0C5-325D-45DE-668885EC6477,34BD6741-474A-1255-199E-5D1037BC25FA,3CC9A57D-9E90-7978-5709-06E5A063339E</newElementsIDs>
+<usedAttributes>
 <attributeRef>8463FF0B-D0C5-325D-45DE-668885EC6477</attributeRef>
+<attributeRef>34BD6741-474A-1255-199E-5D1037BC25FA</attributeRef>
+<attributeRef>3CC9A57D-9E90-7978-5709-06E5A063339E</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
