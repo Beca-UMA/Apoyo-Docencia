@@ -1,5 +1,5 @@
 import csv
-import pandas as pd
+
 
 class Classroom:
     def __init__(self, specification, location, num_pc, s_o, num_class, capacity, specialization=''):
