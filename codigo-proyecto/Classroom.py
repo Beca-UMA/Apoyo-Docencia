@@ -25,7 +25,7 @@ class Classroom:
 
 
     def set_s_o(self, s_o):
-        self_s_o = s_o
+        self._s_o = s_o
 
 
     def set_specialization(self, specialization):
@@ -35,7 +35,7 @@ class Classroom:
     def set_num_class(self, num_class):
         self.num_class = num_class
 
-
+    
     def set_capacity(self, capacity):
         self.capacity = capacity
     
