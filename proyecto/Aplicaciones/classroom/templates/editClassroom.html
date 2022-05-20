@@ -1,0 +1,49 @@
+{% extends "./plantilla.html" %}
+
+{% block title %} Listado de clases {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="md-col-4 offset-md-4">
+        <h2>Edición de clases</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/updateClassroom/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="id_num_class" name="id_num_class" value="{{clase.num_class}}" readonly
+                        class="form-control" placeholder="Número del laboratorio" minlength="3" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="id_location" name="id_location" value="{{clase.location}}" readonly
+                        class="form-control" placeholder="Localización" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="id_s_o" name="id_s_o" value="{{clase.s_o}}"
+                        class="form-control" placeholder="Sistema operativo" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="id_num_pc" name="id_num_pc" value="{{clase.num_pc}}"
+                        class="form-control" min="1" value="30">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="id_capacity" name="id_capacity" value="{{clase.capacity}}"
+                        class="form-control" placeholder="Aforo máximo" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="id_specialization" name="id_specialization" value="{{clase.specialization}}"
+                        class="form-control" placeholder="Especialización" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="id_specification" name="id_specification" value="{{clase.specification}}"
+                        class="form-control" placeholder="Especificación">
+                    </div>
+        
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

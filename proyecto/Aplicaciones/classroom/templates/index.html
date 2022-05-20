@@ -1,0 +1,51 @@
+{% extends "./plantilla.html" %}
+
+{% block title %} Listado de clases {% endblock %}
+
+{% block body %}
+<h2>Lista de clases</h2>
+<div class="row">       
+    <form action="/importClassroom/" method="POST"> 
+        {% csrf_token %}
+        <div class="custom-file">
+            <label class="custom-file-label" for="file">Seleccionar Archivo</label>
+            <input type="file" class="custom-file-input" enctype="multipart/form-data" name= "Classroom_csv" id="Classroom_csv" lang="es">  
+            <div>
+                <button type = "submit" class="btn btn-success">Importar</button>
+            </div>
+        </div>
+    </form>
+    <div class="container mt-4 py-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Número de la clase:</th>
+                    <th>Localización:</th>
+                    <th>Sistema operativo:</th>
+                    <th>Número de ordenadores:</th>
+                    <th>Aforo máximo del aula:</th>
+                    <th>Especialización:</th>
+                    <th>Especificación:</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in clases %}
+                <tr>
+                    <td>{{c.num_class}}</td>
+                    <td>{{c.location}}</td>
+                    <td>{{c.s_o}}</td>
+                    <td>{{c.num_pc}}</td>
+                    <td>{{c.capacity}}</td>
+                    <td>{{c.specialization}}</td>
+                    <td>{{c.specification}}</td>
+                    <td><a href="editClassroom/{{c.num_class}}/{{c.location}}" class="btn btn-info">Editar</a></td>
+                    <td><a href="removeClassroom/{{c.num_class}}/{{c.location}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="createClassroom/" class="btn btn-success">Nueva clase</a>
+    </div>
+</div>
+{% endblock %}
