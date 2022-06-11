@@ -9,5 +9,5 @@ urlpatterns = [
     path('editClassroom/<num_class>/<location>', views.editClassroom),
     path('updateClassroom/', views.updateClassroom),
 
-    path('importClassroom/', views.importClassroom)
+    path('', views.importClassroom)
 ] 

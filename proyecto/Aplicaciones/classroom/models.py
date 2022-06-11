@@ -11,6 +11,19 @@ class Classroom(models.Model):
     s_o = models.CharField(max_length=20)
     capacity = models.CharField(max_length=20)
     specialization = models.CharField(max_length=100)
+
+    def import_class_from_csv(file):
+        reader = csv.DictReader(file, delimiter=';')
+        list_clases = []
+        for row in reader:
+            num_class = row['Laboratorio']
+            location = row['Sede']
+            capacity = row['Aforo']
+            num_pc = row['Equipos']
+            s_o = row['Sistema Operativo']
+            specification = row['Caracteristicas']
+            clase = Classroom(specification,location,num_pc,s_o,num_class,capacity)
+            list_clases.append(clase)
     
     def __str__(self):
         texto = "{0} ({1})"

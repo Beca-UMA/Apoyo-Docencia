@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Aplicaciones.classroom.apps.ClassroomConfig',
+    'import_export',
 ]
 
 MIDDLEWARE = [

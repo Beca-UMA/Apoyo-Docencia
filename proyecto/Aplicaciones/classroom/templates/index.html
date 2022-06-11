@@ -5,15 +5,11 @@
 {% block body %}
 <h2>Lista de clases</h2>
 <div class="row">       
-    <form action="/importClassroom/" method="POST"> 
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="custom-file">
-            <label class="custom-file-label" for="file">Seleccionar Archivo</label>
-            <input type="file" class="custom-file-input" enctype="multipart/form-data" name= "Classroom_csv" id="Classroom_csv" lang="es">  
-            <div>
-                <button type = "submit" class="btn btn-success">Importar</button>
-            </div>
-        </div>
+        <input type="file" name="myfile">
+        <button href="importClassroom/", type="submit">Upload</button>
+        <h2>Upload Excel File</h2>
     </form>
     <div class="container mt-4 py-2">
         <table class="table table-striped">
