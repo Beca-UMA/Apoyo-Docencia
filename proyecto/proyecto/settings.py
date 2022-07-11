@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Aplicaciones.classroom.apps.ClassroomConfig',
+    'Aplicaciones.request_class.apps.RequestClassConfig',
+    'Aplicaciones.teacher.apps.TeacherConfig',
+    'Aplicaciones.small_group.apps.SmallGroupConfig',
+    'Aplicaciones.period.apps.PeriodConfig',
     'import_export',
 ]
 
