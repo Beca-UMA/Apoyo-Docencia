@@ -34,3 +34,7 @@ class Classroom(models.Model):
             # don't attempt to compare against unrelated types
             return NotImplemented
         return self.num_class == other.num_class and self.location == other.location
+
+    def __hash__(self):
+        return hash((self.num_class, self.specification, self.location, self.num_pc, self.s_o, self.capacity, self.specialization))
+

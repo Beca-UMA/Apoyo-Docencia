@@ -4,6 +4,9 @@ from .resources import ClassromResource
 from django.contrib import messages
 from tablib import Dataset
 from django.http import HttpResponse
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
 
 # Create your views here.
 def index(request):
@@ -76,7 +79,9 @@ def updateClassroom(request):
 
 
 def removeClassroom(request, num_class, location):
-    clase = Classroom.objects.get(num_class=num_class, location=location)
+
+    clase = get_object_or_404(Classroom, num_class=num_class, location=location)
+    print(f"CLASE ES:: {clase.__hash__}")
     clase.delete()
     return redirect('/')
 
