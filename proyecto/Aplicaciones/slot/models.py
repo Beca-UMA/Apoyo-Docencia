@@ -16,8 +16,11 @@ class Slot(models.Model):
     def __str__(self) -> str:
         return f"Day: {self.day}, horario: {self.schedule}"
 
-    def __eq__(self, __o: object) -> bool:
-        return super().__eq__(__o)
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Slot):
+            # don't attempt to compare against unrelated types
+            return NotImplemented
+        return self.day == other.day and self.schedule == other.schedule
 
     def __hash__(self) -> int:
         return super().__hash__()

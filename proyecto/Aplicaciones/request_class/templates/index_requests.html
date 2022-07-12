@@ -1,0 +1,66 @@
+{% extends "./plantilla.html" %}
+
+{% block title %} Listado de peticiones {% endblock %}
+
+{% block body %}
+<h2>Lista de peticiones</h2>
+<div class="row">       
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="myfile">
+        <button href="importRequest/", type="submit">Upload</button>
+        <h2>Upload Excel File</h2>
+    </form>
+    <div class="container mt-4 py-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>Tipo:</th>
+                    <th>Preferencia:</th>
+                    <th>Localización:</th>
+                    <th>Especificación:</th>
+                    <th>Núm. Alumnos:</th>
+                    <th>S.O.:</th>
+                    <th>Especialización:</th>
+                    <th>Fecha Inicio:</th>
+                    <th>Fecha Fin:</th>
+                    <th>Hora Inicio:</th>
+                    <th>Hora Fin:</th>
+                    <th>Realizada por:</th>
+                    <th>Imparte:</th>
+                    <th>Grupo:</th>
+                    <th>Periodo:</th>
+                    <th colspan="2">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in requests %}
+                <tr>
+                    <td>{{r.code}}</td>
+                    <td>{{r.typ}}</td>
+                    <td>{{r.preference}}</td>
+                    <td>{{r.location}}</td>
+                    <td>{{r.specification}}</td>
+                    <td>{{r.num_alum}}</td>
+                    <td>{{r.s_o}}</td>
+                    <td>{{r.specialization}}</td>
+                    <td>{{r.start_date}}</td>
+                    <td>{{r.end_date}}</td>
+                    <td>{{r.start_hour}}</td>
+                    <td>{{r.end_hour}}</td>
+                    <td>{{r.sender.name}}</td>
+                    <td>{{r.imparter.name}}</td>
+                    <td>{{r.s_g.code}}</td>
+                    <td>{{r.per.typ}}</td>
+
+                    <td><a href="editRequest/{{r.key}}" class="btn btn-info">Editar</a></td>
+                    <td><a href="removeRequest/{{r.key}}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="createRequest/" class="btn btn-success">Nueva petición</a>
+    </div>
+</div>
+{% endblock %}

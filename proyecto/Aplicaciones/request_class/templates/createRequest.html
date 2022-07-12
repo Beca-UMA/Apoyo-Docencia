@@ -1,0 +1,49 @@
+{% extends "./plantilla.html" %}
+
+{% block title %} Listado de clases {% endblock %}
+
+{% block body %}
+
+<div class="card">
+    <div class="card-body">
+        <h2>Nueva clase</h2>
+        Introduce la información sobre el aula.
+        <div class="container py-4">
+            <form action="/newClassroom/" method="POST"> {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="id_num_class" name="id_num_class" 
+                    class="form-control" placeholder="Número del laboratorio" minlength="3" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="id_location" name="id_location" 
+                    class="form-control" placeholder="Localización" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="id_s_o" name="id_s_o" 
+                    class="form-control" placeholder="Sistema operativo" >
+                </div>
+                <div class="form-group">
+                    <input type="text" id="id_num_pc" name="id_num_pc" 
+                    class="form-control" min="1" value="30">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="id_capacity" name="id_capacity" 
+                    class="form-control" placeholder="Aforo máximo" >
+                </div>
+                <div class="form-group">
+                    <input type="text" id="id_specialization" name="id_specialization" 
+                    class="form-control" placeholder="Especialización" >
+                </div>
+                <div class="form-group">
+                    <input type="text" id="id_specification" name="id_specification" 
+                    class="form-control" placeholder="Especificación">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

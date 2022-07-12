@@ -11,6 +11,8 @@ from django.shortcuts import (get_object_or_404,
 # Create your views here.
 def index(request):
     clases = Classroom.objects.all()
+
+    ## Si se ha importado algún archivo
     if request.method == 'POST':
         classroom_resource = ClassromResource()
         dataset = Dataset()
@@ -35,7 +37,8 @@ def index(request):
                             location=location,num_pc=num_pc, s_o=s_o,
                             capacity=capacity,specialization=specialization)
             value.save()
-    clases = Classroom.objects.all()
+
+    ## Por defecto
     return render(request, "index.html", {"clases": clases})
 
 def newClassroom(request):

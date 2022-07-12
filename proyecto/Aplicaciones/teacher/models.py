@@ -7,7 +7,7 @@ class Teacher(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="ID unique for the teacher")
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=9)
-    email = models.CharField(max_length=40)
+    email = models.CharField(max_length=40, unique=True)
     department = models.CharField(max_length=100)
 
 
@@ -19,7 +19,7 @@ class Teacher(models.Model):
         if not isinstance(other, Teacher):
             # don't attempt to compare against unrelated types
             return NotImplemented
-        return self.id == other.id
+        return self.name == other.name and self.email == other.email
 
     
     def __hash__(self) -> int:

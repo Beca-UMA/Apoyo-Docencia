@@ -8,12 +8,16 @@ class SmallGroup(models.Model):
     grade =  models.IntegerField(default=5)
     letter = models.CharField(max_length=1)
     code = models.CharField(max_length=4)
+    degree= models.CharField(max_length=100)
 
     def __str__(self):
         return self.code
 
-    def __eq__(self, __o: object) -> bool:
-        return super().__eq__(__o)
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, SmallGroup):
+            # don't attempt to compare against unrelated types
+            return NotImplemented
+        return self.subject == other.subject and self.code == other.code
 
     def __hash__(self) -> int:
         return super().__hash__()
