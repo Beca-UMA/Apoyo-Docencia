@@ -7,9 +7,10 @@
 <div class="row">       
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="myfile">
-        <button href="importClassroom/", type="submit">Upload</button>
-        <h2>Upload Excel File</h2>
+        <h6> Importa el fichero Excel: 
+            <input type="file" name="myfile">
+            <button href="importClassroom/", type="submit", class="btn btn-success">Importar</button>
+        </h6>
     </form>
     <div class="container mt-4 py-2">
         <table class="table table-striped">

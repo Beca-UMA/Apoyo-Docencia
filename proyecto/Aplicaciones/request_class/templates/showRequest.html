@@ -1,0 +1,30 @@
+{% extends "./plantilla.html" %}
+
+{% block title %} Listado de clases {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="md-col-4 offset-md-4">
+        <h2>Petición</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{request.code}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{request.typ}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{request.preference}}</h6>
+                <p class="card-text">Localización: {{request.location}}</p>
+                <p class="card-text">Especificación: {{request.specification}}</p>
+                <p class="card-text">Número de alumnos: {{request.num_alum}}</p>
+                <p class="card-text">Sistema Operativo: {{request.s_o}}</p>
+                <p class="card-text">Especialización: {{request.specialization}}</p>
+                <p class="card-text">Fecha reserva: {{request.start_date}} // {{request.end_date}} -> Día semana {{request.alternative_day}}</p>
+                <p class="card-text">Horario clase: {{request.start_hour}} // {{request.end_hour}}</p>
+                <p class="card-text">Reservada por: {{request.sender.name}}</p>
+                <p class="card-text">Impartida por: {{request.imparter.name}}</p>
+                <p class="card-text">Asignatura: {{request.s_g.subject}}</p>
+                <p class="card-text">Grupo: {{request.s_g.code}}</p>
+                <p class="card-text">Periodo: {{request.per.typ}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

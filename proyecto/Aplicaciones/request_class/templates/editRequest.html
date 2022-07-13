@@ -4,45 +4,130 @@
 
 {% block body %}
 <div class="row">
-    <div class="md-col-4 offset-md-4">
-        <h2>Edición de clases</h2>
-        <div class="card">
-            <div class="card-body">
-                <form action="/updateClassroom/" method="POST"> {% csrf_token %}
+    <h2>Edición de petición</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="updateRequest/" method="POST"> {% csrf_token %}
+                <div class="container">
+                    <div class="row align-items-start">
+                    <div class="col">
+                        <h6>Solicitud</h6>
+                        <div class="form-group">
+                            <input type="text" id="code_request" name="code_request" value="{{request.code}}" readonly
+                            class="form-control" placeholder="ID Reresva" minlength="3" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="typ" name="typ" value="{{request.typ}}" readonly
+                            class="form-control" placeholder="Tipo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="preference" name="preference" value="{{request.preference}}" readonly
+                            class="form-control" placeholder="Preferencia" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="location" name="location" value="{{request.location}}"
+                            class="form-control" placeholder="Localización" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="specification" name="specification" value="{{request.specification}}"
+                            class="form-control" placeholder="Especificación">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="num_alum" name="num_alum" value="{{request.num_alum}}"
+                            class="form-control" placeholder="Número de alumnos">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="s_o" name="s_o" value="{{request.s_o}}"
+                            class="form-control" placeholder="Sistema Operativo">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="specialization" name="specialization" value="{{request.specialization}}"
+                            class="form-control" placeholder="Especialización">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="start_date" name="start_date" value="{{request.start_date |date:'Y-m-d'}}"
+                            class="form-control" placeholder="Fecha inicio reserva">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="end_date" name="end_date" value="{{request.end_date|date:'Y-m-d'}}"
+                            class="form-control" placeholder="Fecha fin reserva">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="alternative_day" name="alternative_day" value="{{request.alternative_day}}"
+                            class="form-control" placeholder="Dia">
+                        </div>
+                        <div class="form-group">
+                            <input type="time" id="start_hour" name="start_hour" value="{{request.start_hour|time:'H:i'}}"
+                            class="form-control" placeholder="Hora inicio">
+                        </div>
+                        <div class="form-group">
+                            <input type="time" id="end_hour" name="end_hour" value="{{request.end_hour|time:'H:i'}}"
+                            class="form-control" placeholder="Hora fin">
+                        </div>
+                    </div>
+                <div class="col">
+                    <h6>Profesor</h6>
                     <div class="form-group">
-                        <input type="text" id="id_num_class" name="id_num_class" value="{{clase.num_class}}" readonly
-                        class="form-control" placeholder="Número del laboratorio" minlength="3" required>
+                        <input type="text" id="name_sender" name="name_sender" value="{{request.sender.name}}" readonly
+                        class="form-control" placeholder="Realizada por">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="id_location" name="id_location" value="{{clase.location}}" readonly
-                        class="form-control" placeholder="Localización" required>
+                        <input type="text" id="name_teacher" name="name_teacher" value="{{request.imparter.name}}" 
+                        class="form-control" placeholder="Impartida por">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="id_s_o" name="id_s_o" value="{{clase.s_o}}"
-                        class="form-control" placeholder="Sistema operativo" >
+                        <input type="text" id="phone" name="phone" value="{{request.imparter.phone}}" 
+                        class="form-control" placeholder="Teléfono">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="id_num_pc" name="id_num_pc" value="{{clase.num_pc}}"
-                        class="form-control" min="1" value="30">
+                        <input type="text" id="email" name="email" value="{{request.imparter.email}}" 
+                        class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="id_capacity" name="id_capacity" value="{{clase.capacity}}"
-                        class="form-control" placeholder="Aforo máximo" >
+                        <input type="text" id="department" name="department" value="{{request.imparter.department}}" 
+                        class="form-control" placeholder="Departamento">
+                    </div>
+                </div>
+                <div class="col">
+                    <h6>Grupo reducido</h6>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" value="{{request.s_g.subject}}" 
+                        class="form-control" placeholder="Asignatura">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="id_specialization" name="id_specialization" value="{{clase.specialization}}"
-                        class="form-control" placeholder="Especialización" >
+                        <input type="text" id="grade" name="grade" value="{{request.s_g.grade}}" 
+                        class="form-control" placeholder="Curso">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="id_specification" name="id_specification" value="{{clase.specification}}"
-                        class="form-control" placeholder="Especificación">
+                        <input type="text" id="letter" name="letter" value="{{request.s_g.letter}}" 
+                        class="form-control" placeholder="Letra">
                     </div>
-        
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                        <input type="text" id="group" name="group" value="{{request.s_g.code}}" 
+                        class="form-control" placeholder="Asignatura">
                     </div>
-                </form>
+                    <div class="form-group">
+                        <input type="text" id="degree" name="degree" value="{{request.s_g.degree}}" 
+                        class="form-control" placeholder="Titulación">
+                    </div>
+                </div>
+                <div class="col">
+                    <h6>Periodo</h6>
+                    <div class="form-group">
+                        <input type="text" id="year" name="year" value="{{request.per.year}}" readonly
+                        class="form-control" placeholder="Año">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="name_period" name="name_period" value="{{request.per.typ}}" 
+                        class="form-control" placeholder="Tipo de periodo: 1er Cuatri...">
+                    </div>
+                </div>                
+                </div>
             </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
