@@ -1,4 +1,7 @@
+from unicodedata import numeric
 from django.shortcuts import render, redirect
+
+from Aplicaciones.characteristic.models import Characteristic
 from .models import Classroom
 from .resources import ClassromResource
 from django.contrib import messages
@@ -24,6 +27,8 @@ def index(request):
         imported_data = dataset.load(new_classroom.read(), format='xlsx')
         for data in imported_data:
             print(data)
+            if data[0] == None:
+                break
             num_class = data[0]
             location = data[1]
             capacity = data[2]
@@ -37,9 +42,26 @@ def index(request):
                             location=location,num_pc=num_pc, s_o=s_o,
                             capacity=capacity,specialization=specialization)
             value.save()
+            make_characteristic(value,value.location,False)
+            make_characteristic(value,value.s_o,False)
+            make_characteristic(value,value.num_pc,True)
+            if specification is not 'Not specificated':
+                make_characteristic(value,value.specification,False)
+
 
     ## Por defecto
     return render(request, "index.html", {"clases": clases})
+
+
+def make_characteristic(classroom, characteristic, numeric):
+    q = Characteristic.objects.filter(name=characteristic)
+    if not q.exists():
+        c = Characteristic(name=characteristic, numeric=numeric, classroom=classroom)
+        c.save()
+    else:
+        c = Characteristic.objects.get(name=characteristic)
+        c.classroom=classroom
+        c.save()
 
 def newClassroom(request):
     num_class = request.POST['id_num_class']

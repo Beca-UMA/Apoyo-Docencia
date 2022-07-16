@@ -1,7 +1,9 @@
 from re import S
 from django.shortcuts import render, redirect
+from Aplicaciones.classroom.views import make_characteristic
 
 from Aplicaciones.teacher.models import Teacher
+from Aplicaciones.characteristic.models import Characteristic
 from .models import  RequestClass
 from .resources import RequestClassResource
 from django.contrib import messages
@@ -65,7 +67,6 @@ def index(request):
                 specialization = data[23]
 
                 # Buscamos al profesor que la va a impartir y quien la reclama
-                teachers = Teacher.objects.all()
                 q = Teacher.objects.filter(email=email)
                 if not q.exists():
                     sender = Teacher(name=name_sender, phone=phone, email=email,department=department)
@@ -130,15 +131,38 @@ def index(request):
                     value.s_o = data[22]
                     value.specialization = data[23]
                     value.save()
+                if not specification in ['No specificated', 'Cualquiera' ]:
+                    make_characteristic(value,value.specification,False)
+                if value.s_o != 'Indiferente':
+                    make_characteristic(value,value.s_o,False)
+                if 'Cualquier' not in location:
+                    make_characteristic(value,value.location,False)
+                make_characteristic(value,value.num_alum,True)
                 
-                print(f"VALOR:::::: {teacher.id}")
-                print(f"VALOR:::::: {sender.id}")
-                print(f"VALOR:::::: {period.id}")
-                print(f"VALOR:::::: {small_group.id}")
-                
-
     ## Por defecto
     return render(request, "index_requests.html", {"requests": requests_classes})
+
+
+def make_characteristic(request, characteristic, numeric):
+    if numeric==True:
+        q = Characteristic.objects.filter(name__gte = characteristic)
+        if not q.exists():
+            c = Characteristic(name=characteristic, numeric=numeric, applicnat=request)
+            c.save()
+        else:
+            for charc in q.iterator():
+                charc.applicant=request
+                charc.save()
+
+    else:
+        q = Characteristic.objects.filter(name=characteristic)
+        if not q.exists():
+            c = Characteristic(name=characteristic, numeric=numeric, applicnat=request)
+            c.save()
+        else:
+            c = Characteristic.objects.get(name=characteristic)
+            c.applicant=request
+            c.save()
 
 
 

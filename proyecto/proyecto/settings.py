@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Aplicaciones.small_group.apps.SmallGroupConfig',
     'Aplicaciones.period.apps.PeriodConfig',
     'Aplicaciones.slot.apps.SlotConfig',
+    'Aplicaciones.characteristic.apps.CharacteristicConfig',
     'import_export',
 ]
 
