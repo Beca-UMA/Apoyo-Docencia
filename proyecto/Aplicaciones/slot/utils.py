@@ -1,23 +1,49 @@
+import operator
+from datetime import datetime, timedelta, time
 from doctest import master
 from http.client import CONFLICT
 from telnetlib import SE
+from webbrowser import Opera
 
 from requests import TooManyRedirects
 from Aplicaciones.classroom.models import Classroom
 from Aplicaciones.request_class.models import RequestClass
 from .models import Slot
 
-COMFLICTS = []
-MAX_STRIKES = 3
+CONFLICTS = []
+MAX_STRIKES = float('inf')
+
+def main():
+    all_matches = matches()
+    # Ordenar de menos posibilidades para elegir a más posibilidades para elegir
+    sorted_matches = sorted(all_matches , key=take_second)
+    solution = {}
+    uc = unique_codes()
+    for k in uc:
+        solution[k] = None
+
+    strikes = 0
+    if CONFLICTS:
+        return CONFLICTS
+    else:    
+        strikes,solution=assign(solution, sorted_matches, strikes, "Preferente", None, None)
+        print(f"SOLUCION: {solution}, CONFLICTOS: {strikes}")
+        return solution
+
+
+def take_second(elem):
+    return len(elem.values()) 
+
 
 def unique_codes():
-    codes = RequestClass.objects.values_list('code')
+    codes = RequestClass.objects.values_list('code', flat=True)
     return list(dict.fromkeys(codes))
 
 
 def real_targets(request):
     real_targets = []
-    possible_tagets = Classroom.objects.filter(num_pc__gte = request.num_alum)
+    possible_tagets = Classroom.objects.filter(capacity__gte = request.num_alum)
+    # print(f"REQUEST:::{request}, possible_targets:::{possible_tagets}")
     for t in possible_tagets.iterator():
         if not request.specification in ['No specificated', 'Cualquiera' ]:
             if t.specification != request.specification:
@@ -30,43 +56,22 @@ def real_targets(request):
                 continue
         real_targets.append(t)
     if len(real_targets) == 0:
-        CONFLICT.append(f"El request con código {request.code} no se puede asignar a ningun aula ya que ninguna cumple sus requisitos")
+        CONFLICTS.append(f"El request con código {request.code} no se puede asignar a ningun aula ya que ninguna cumple sus requisitos")
     return real_targets
     
+
 def matches():
-    unique_codes = unique_codes() # Conjunto candidatos
+    uc = unique_codes() # Conjunto candidatos
     matches = [] # Diccionario con una asignación de clase con las peticiones que puede satisfacer
-    for code in unique_codes:
+    for code in uc:
         q = RequestClass.objects.filter(code=code)
         for r in q.iterator():
-            real_targets = real_targets(r) # Lista de clases con las mismas características
+            rts = real_targets(r) # Lista de clases con las mismas características
             match = {}
-            match[r.code] = real_targets
+            match[r.code] = rts
             matches.append(match)
             break
-
-def preprocess():
-    matches = matches()
-
-    # Ordenar de menos posibilidades para elegir a más posibilidades para elegir
-    sorted_matches = sorted(matches, key=lambda x:x[1])
-    solution = {}
-    for k in unique_codes:
-        solution[k] = None
-
-    strikes = 0
-
-    assign(solution, sorted_matches, strikes)
-
-    # COSAS QUE HACER
-    # 2. LAS FRANJAS HORARIAS DE LOS SLOT SON 6: 1,2,3 MAÑANA Y 4,5,6 TARDE
-    # 3. LOS EXAMENES/MASTER (CREO QUE LOS MASTER TAMBIEN) OCUPAN DOS FRANJAS
-    # ASI QUE NO PUEDEN RESERVAR LAS FRANJAS 3 NI 6
-    # 4. EL ALGORITMO TIENE COMO FUNCION DE CORTE EL NUMERO DE CONFLICTOS,
-    # SI EN ALGUNA RAMA SUPERA (POR UN PONER) 5 CONFLICTOS SE CORTA ESA RAMA Y SE VA A LA SIGUIENE.
-    # 5. LAS RAMAS SE EXPANDEN TIPO:
-    # PET1_PREFERENT -> ASIGNAR_CLASE(), PET2_PREFERENT -> ASIGNAR_CLASE() {SI SE DA CONFLICTOS DE HORARIO, SE
-    # SUMA 1 CONFLICTO Y SE SIGUE, ASIGNANDO AHORA LA PET3}
+    return matches
 
 
 def assign(solution, matches, strikes, preference, count, classroom):
@@ -77,55 +82,120 @@ def assign(solution, matches, strikes, preference, count, classroom):
     # count-> Posición en la lista de matches que habrá que hacer la elección
     # classroom-> Classroom.class
 
-    target = matches[count] # Codigo de la reserva para la siguiente elección
-    request = RequestClass.objects.get(code = target.keys()[0], preference=preference)
-    solution, conflict = add_choice(solution, matches, request, classroom)
-    
-    is_empty = [{x:v} for x,v in solution.items() if v==None]
-    if len(is_empty) == 0:
-        # Ya se han asignado todas las peticiones
-        return strikes, solution
+    if count != None:
+        target = matches[count] # Codigo de la reserva para la siguiente elección
+        for code in target:
+            request = RequestClass.objects.get(code = code, preference=preference)
+            solution, conflict = add_choice(solution, matches, request, classroom)
 
-    if strikes == MAX_STRIKES:
-        return None, solution
-    if conflict:
-        strikes += 1
+        is_empty = [{x:v} for x,v in solution.items() if v==None]
+        if len(is_empty) == 0:
+            # Ya se han asignado todas las peticiones
+            return conflict, solution
 
-    q = RequestClass.objects.filter(code__in = target.keys())
-    choice_preferente = None
-    choice_alternativo = None
-    for r in q.iterator():
-        if r.preference =='Preferente':
-            choice_preferente = r
-        else:
-            choice_alternativo = r
+        if strikes >= MAX_STRIKES:
+            return float('inf'), solution
+        
+        strikes += conflict
+    else:
+        # Primera iteración
+        count = -1
 
     min_strikes_preferente = float('inf')
     min_strikes_alternativo = float('inf')
-    preferente = {}
-    alternativo = {}
-    for _,classroom in matches[count].items():
-        strikes_preferente, preferente = assign(solution, matches, strikes, "Preferente", count+1, classroom)
+    best_preferente = {}
+    best_alternativo = {}
+    strikes_preferente = None
+    strikes_alternativo = None
+    _, classrooms = list(matches[count+1].items())[0]
+    for classroom in classrooms:
+        # PREFERENTE
+        strikes_preferente, preferente = assign(solution.copy(), matches, strikes, "Preferente", count+1, classroom)
         if strikes_preferente < min_strikes_preferente:
-            preferente = preferente
-        strikes_alternativo, alternativo = assign(solution, matches, strikes, "Alternativo", count+1, classroom)
+            best_preferente = preferente.copy()
+            min_strikes_preferente = strikes_preferente
+
+        #ALTERNATIVO
+        strikes_alternativo, alternativo = assign(solution.copy(), matches, strikes, "Alternativo", count+1, classroom)
         if strikes_alternativo < min_strikes_alternativo:
-            alternativo = alternativo
-    min_strikes = min(strikes_preferente, strikes_alternativo)
-    if min_strikes == strikes_preferente:
-        return strikes_preferente, preferente
+            best_alternativo = alternativo.copy()
+            min_strikes_alternativo = strikes_alternativo
+
+    min_strikes = min(min_strikes_preferente, min_strikes_alternativo)
+    # if min_strikes<MAX_STRIKES:
+    #     MAX_STRIKES=min_strikes
+    # ME DA ERROR DE REFERENCED BEFORE ASIGMENT EN LA LINEA 96 SI DESCOMENTO ESTO
+    if min_strikes == min_strikes_preferente:
+        return min_strikes_preferente, best_preferente
     else:
-        return strikes_alternativo, alternativo
+        return min_strikes_alternativo, best_alternativo
 
 
-def add_choice(solution, matches, request, classroom) -> tuple (dict, bool):
+def add_choice(solution, matches, request, classroom):
     # Añadir la elección a la solución, donde en solución tendrá que estar como clave 
     # el código de la reserva y como valor -> franja:1 y si es una franja mas larga por 
     # examen poner -> franja:[1,2]. Tener en cuenta que si se reserva dos franjas no puedas reservar la [3,4]
     # y por ultimo en la elección seleccionar la clase
-    None
+    # print(f"\tADD CHOICE {request}---> SOLUTION: {solution}, CLASSROOM: {classroom}")
+    schedule = get_schedule(request)
+    all_conflict = conflict(solution, schedule, request, classroom)
+    solution[request.code] = {
+        "franja":schedule,
+        "clase":classroom.num_class,
+        "start_date":request.start_date,
+        "end_date":request.end_date,
+        "day":request.alternative_day
+    }
+    return solution, all_conflict
 
-def conflict(solution, classroom, schedule) -> bool:
+
+def conflict(solution, schedule, request, classroom) -> int:
     # Comprobar en la solucion si hay conflictos entre la shcedule y la clase elegida entre las elecciones
-    # de la solucion
-    None 
+    # de la solucion y devolver un numero de veces que ha habido conflictos con otros horarios
+    conflict = 0
+    for code, assignment in solution.items():
+        if assignment != None and assignment["clase"] == classroom.num_class and len(set(schedule) & set(assignment["franja"])):
+            latest_start = max(assignment["start_date"], request.start_date)
+            earliest_end = min(assignment["end_date"], request.end_date)
+            delta = (earliest_end - latest_start).days + 1
+            overlap = max(0, delta)
+            conflict += overlap
+
+    return conflict
+
+
+def get_schedule(request):
+    # Con el request, dar una lista con la franja horaria dependiendo de la hora de entrada y la hora de salida.
+    # Las franjas horarias son: 
+    # 1 -> 8:30 / 10:30
+    # 2 -> 10:30 / 12:30
+    # 3 -> 12:3O / 14:30
+    # 4 -> 15:30 / 17:30
+    # 5 -> 17:30 / 19:30
+    # 6 -> 19:30 / 21:3O
+    result = []
+    schedule =  time(8, 30, 0)
+    schedule_found = False
+    strip = 1
+    while not schedule_found:
+        next_schedule = schedule.replace(hour=schedule.hour+2)
+        if request.start_hour >= schedule and request.start_hour <= next_schedule:
+            result.append(strip)
+
+
+        if request.end_hour >= schedule and request.end_hour <= next_schedule:
+            result.append(strip)
+            schedule_found = True
+        schedule = next_schedule
+        strip += 1
+    return unique_list(result)
+
+
+def unique_list(lista):
+    list_set = set(lista)
+    return (list(list_set))
+
+
+
+
+
