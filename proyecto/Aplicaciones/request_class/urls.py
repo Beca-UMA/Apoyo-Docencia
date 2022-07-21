@@ -9,5 +9,6 @@ urlpatterns = [
     path('removeRequest/<key>', views.removeRequest),
     path('editRequest/<key>', views.editRequest),
     path('editRequest/updateRequest/', views.updateRequest),
-    path('', views.importRequest)
+    path('asignationRequest/', views.asignationRequest),
+
 ] 

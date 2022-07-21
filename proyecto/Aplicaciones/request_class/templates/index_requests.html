@@ -9,9 +9,14 @@
         {% csrf_token %}
         <h6>
             Importa el fichero Excel: <input type="file" name="myfile"> 
-            <button href="importRequest/", type="submit", class="btn btn-success">Importar</button>  
+            <button href="importRequest/", type="submit", class="btn btn-success", name="btnfile">Importar</button>  
         </h6>
     </form>
+    {% if requests %}
+        <div class="container">   
+            <a href="asignationRequest/" class="btn btn-success">Asignar Peticiones</a>
+        </div>
+    {% endif%}
     <div class="container mt-4 py-2">
         <table class="table table-striped">
             <thead>

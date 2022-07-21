@@ -3,17 +3,21 @@ from datetime import datetime, timedelta, time
 from doctest import master
 from http.client import CONFLICT
 from telnetlib import SE
+from urllib.request import Request
 from webbrowser import Opera
+import json
 
-from requests import TooManyRedirects
+from requests import TooManyRedirects, request
 from Aplicaciones.classroom.models import Classroom
 from Aplicaciones.request_class.models import RequestClass
+from proyecto.settings import BASE_DIR, STATIC_URL
 from .models import Slot
 
 CONFLICTS = []
-MAX_STRIKES = float('inf')
+MAX_STRIKES  = float('inf')
 
 def main():
+    # PREPROCESS
     all_matches = matches()
     # Ordenar de menos posibilidades para elegir a más posibilidades para elegir
     sorted_matches = sorted(all_matches , key=take_second)
@@ -21,14 +25,25 @@ def main():
     uc = unique_codes()
     for k in uc:
         solution[k] = None
-
     strikes = 0
+
+    # INFERENCE
     if CONFLICTS:
         return CONFLICTS
     else:    
         strikes,solution=assign(solution, sorted_matches, strikes, "Preferente", None, None)
         print(f"SOLUCION: {solution}, CONFLICTOS: {strikes}")
-        return solution
+    # POSTPROCESS
+    for code, assignation in solution.items():
+        r = RequestClass.objects.get(code=code,preference=assignation["preference"])
+        c = Classroom.objects.get(num_class=assignation["class"])
+        s = Slot(schedule=str(assignation["schedule"]), request=r, classroom=c)
+        s.save()
+    solution["conflictos"] = strikes
+
+    with open(str(STATIC_URL)+"asignacion.json", "w") as file:
+        json.dump(solution, file)
+
 
 
 def take_second(elem):
@@ -93,6 +108,7 @@ def assign(solution, matches, strikes, preference, count, classroom):
             # Ya se han asignado todas las peticiones
             return conflict, solution
 
+        global MAX_STRIKES
         if strikes >= MAX_STRIKES:
             return float('inf'), solution
         
@@ -122,8 +138,8 @@ def assign(solution, matches, strikes, preference, count, classroom):
             min_strikes_alternativo = strikes_alternativo
 
     min_strikes = min(min_strikes_preferente, min_strikes_alternativo)
-    # if min_strikes<MAX_STRIKES:
-    #     MAX_STRIKES=min_strikes
+    if min_strikes<MAX_STRIKES:
+        MAX_STRIKES=min_strikes
     # ME DA ERROR DE REFERENCED BEFORE ASIGMENT EN LA LINEA 96 SI DESCOMENTO ESTO
     if min_strikes == min_strikes_preferente:
         return min_strikes_preferente, best_preferente
@@ -140,10 +156,13 @@ def add_choice(solution, matches, request, classroom):
     schedule = get_schedule(request)
     all_conflict = conflict(solution, schedule, request, classroom)
     solution[request.code] = {
-        "franja":schedule,
-        "clase":classroom.num_class,
-        "start_date":request.start_date,
-        "end_date":request.end_date,
+        "schedule":schedule,
+        "preference": request.preference,
+        "start_hour":str(request.start_hour),
+        "end_hour":str(request.end_hour),
+        "class":classroom.num_class,
+        "start_date":str(request.start_date),
+        "end_date":str(request.end_date),
         "day":request.alternative_day
     }
     return solution, all_conflict
@@ -154,7 +173,7 @@ def conflict(solution, schedule, request, classroom) -> int:
     # de la solucion y devolver un numero de veces que ha habido conflictos con otros horarios
     conflict = 0
     for code, assignment in solution.items():
-        if assignment != None and assignment["clase"] == classroom.num_class and len(set(schedule) & set(assignment["franja"])):
+        if assignment != None and assignment["class"] == classroom.num_class and len(set(schedule) & set(assignment["schedule"])):
             latest_start = max(assignment["start_date"], request.start_date)
             earliest_end = min(assignment["end_date"], request.end_date)
             delta = (earliest_end - latest_start).days + 1

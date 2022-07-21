@@ -1,0 +1,44 @@
+{% extends "./plantilla.html" %}
+
+{% block title %} Listado de peticiones {% endblock %}
+
+{% block body %}
+<h2>Lista de asignaciones</h2>
+<div class="row">       
+    {% if slots %}
+        {% load static%}
+        <div><a href="{% static 'asignacion.json'%}"download>Descargar Json de la asignación</a></div>     
+
+    {% endif %}
+    <div class="container mt-4 py-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Dia:</th>
+                    <th>Franja Horaria:</th>
+                    <th>Codigo Petición:</th>
+                    <th>Fecha Inicio:</th>
+                    <th>Fecha Fin:</th>
+                    <th>Hora Inicio:</th>
+                    <th>Hora Fin:</th>
+                    <th>Clase:</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in slots %}
+                <tr>
+                    <td>{{s.request.alternative_day}}</td>
+                    <td>{{s.schedule}}</td>
+                    <td>{{s.request.code}}</td>
+                    <td>{{s.request.start_date}}</td>
+                    <td>{{s.request.end_date}}</td>
+                    <td>{{s.request.start_hour}}</td>
+                    <td>{{s.request.end_hour}}</td>
+                    <td>{{s.classroom.num_class}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from Aplicaciones.classroom.views import make_characteristic
 
 from Aplicaciones.teacher.models import Teacher
+from Aplicaciones.slot.models import Slot
 from Aplicaciones.characteristic.models import Characteristic
 from .models import  RequestClass
 from .resources import RequestClassResource
@@ -15,6 +16,7 @@ from django.shortcuts import (get_object_or_404,
 from Aplicaciones.teacher.models import Teacher
 from Aplicaciones.small_group.models import SmallGroup
 from Aplicaciones.period.models import Period
+import Aplicaciones.slot.utils as utils
 from datetime import datetime
 
 # Create your views here.
@@ -22,7 +24,7 @@ def index(request):
     requests_classes = RequestClass.objects.all()
 
     ## Si se ha importado algún archivo
-    if request.method == 'POST':
+    if request.method == 'POST' and 'btnfile' in request.POST:
         request_resource = RequestClassResource()
         dataset = Dataset()
         new_request = request.FILES['myfile']
@@ -137,10 +139,16 @@ def index(request):
                     make_characteristic(value,value.s_o,False)
                 if 'Cualquier' not in location:
                     make_characteristic(value,value.location,False)
-                make_characteristic(value,value.num_alum,True)
-                
+                make_characteristic(value,value.num_alum,True)            
+
     ## Por defecto
     return render(request, "index_requests.html", {"requests": requests_classes})
+
+
+def asignationRequest(request):
+    Slot.objects.all().delete()
+    utils.main()
+    return redirect("/slots")
 
 
 def make_characteristic(request, characteristic, numeric):
