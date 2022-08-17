@@ -1,35 +1,40 @@
 {% extends "./plantilla.html" %}
 
-{% block title %} Listado de peticiones {% endblock %}
+{% block title %} Listado de asignaciones {% endblock %}
+
+{% block navbar_asignaciones %} active {% endblock %}
 
 {% block body %}
+<br>
 <h2>Lista de asignaciones</h2>
-<div class="row">       
+<br>
+<div class="row">
     {% if slots %}
-        {% load static%}
-        <div><a href="{% static 'asignacion.json'%}"download>Descargar Json de la asignación</a></div>     
-
-    {% endif %}
+    {% load static%}
+    <div><a href="{% static 'asignacion.json'%}" download class="btn btn-success"><i class="fa fa-download"></i> Descargar Json de la asignación</a>
+        <a href="deleteSlots/" class="btn btn-danger"><i class="fa fa-trash"></i> Vaciar asignación</a>
+    </div>
+    
     <div class="container mt-4 py-2">
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>Dia:</th>
-                    <th>Franja Horaria:</th>
-                    <th>Codigo Petición:</th>
-                    <th>Fecha Inicio:</th>
-                    <th>Fecha Fin:</th>
-                    <th>Hora Inicio:</th>
-                    <th>Hora Fin:</th>
-                    <th>Clase:</th>
+                <tr class="text-center">
+                    <th>Día</th>
+                    <th>Franja Horaria</th>
+                    <th>Codigo Petición</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Fin</th>
+                    <th>Clase asignada</th>
                 </tr>
             </thead>
             <tbody>
                 {% for s in slots %}
-                <tr>
+                <tr class="text-center">
                     <td>{{s.request.alternative_day}}</td>
                     <td>{{s.schedule}}</td>
-                    <td>{{s.request.code}}</td>
+                    <td> <a href="/requests/showRequest/{{s.request.key}}" class="card-link">{{s.request.code}}</a></td>
                     <td>{{s.request.start_date}}</td>
                     <td>{{s.request.end_date}}</td>
                     <td>{{s.request.start_hour}}</td>
@@ -40,5 +45,10 @@
             </tbody>
         </table>
     </div>
+    {%else%}
+    <div class="alert alert-warning" role="alert">
+        No ha realizado la asignación de laboratorios. Debe realizarla desde la pestaña de peticiones.
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

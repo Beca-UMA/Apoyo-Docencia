@@ -2,55 +2,89 @@
 
 {% block title %} Listado de peticiones {% endblock %}
 
+{% block navbar_peticiones %} active {% endblock %}
+
 {% block body %}
-<h2>Lista de peticiones</h2>
-<div class="row">       
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h6>
-            Importa el fichero Excel: <input type="file" name="myfile"> 
-            <button href="importRequest/", type="submit", class="btn btn-success", name="btnfile">Importar</button>  
-        </h6>
-    </form>
-    {% if requests %}
-        <div class="container">   
-            <a href="asignationRequest/" class="btn btn-success">Asignar Peticiones</a>
-        </div>
-    {% endif%}
+<br>
+<h2>Listado de peticiones</h2>
+<br>
+<div class="row">
+    {% if format %}
+    {% load static%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        El formato del fichero recibido no es correcto
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if missing %}
+    {% load static%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Debe seleccionar un fichero en formato Excel para poder importar su información
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if success %}
+    {% load static%}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Éxito al importar. Se han importado un total de {{num}} peticiones
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if except %}
+    {% load static%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al importar, verifique que está usando el formato correcto de introducción de datos
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    <div>
+        <h6>Importa el fichero Excel:</h6>
+        <form method="POST" enctype="multipart/form-data" class="input-group mb-3">
+            {% csrf_token %}
+            <input class="form-control" type="file" name="myfile">
+            <button href="importRequest/" , type="submit" , class="btn btn-primary" , name="btnfile"><i
+                    class="fa fa-file"></i> Importar</button>
+        </form>
+        <a href="/requests/createRequest/" class="btn btn-success"><i class="fa fa-plus"></i> Nueva petición</a>
+        {% if requests %}
+        <a href="/requests/deleteRequests/" class="btn btn-danger"><i class="fa fa-trash"></i> Vaciar información</a>
+        <a href="/requests/asignationRequest/" class="btn btn-warning"><i class="fa fa-cog"></i> Asignar Peticiones</a>
+        {% endif%}
+        <form action="/requests/search/" method="POST"> {% csrf_token %}
+            <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="ID de solicitud" aria-describedby="button-addon2"
+                    name="search" value="{{search}}">
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">Buscar</button>
+
+            </div>
+        </form>
+    </div>
+
     <div class="container mt-4 py-2">
-        <table class="table table-striped">
+        {%if requests%}
+        <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>ID:</th>
-                    <th>Tipo:</th>
-                    <th>Preferencia:</th>
-                    <!---- <th>Localización:</th>
-                    <th>Especificación:</th>
-                    <th>Núm. Alumnos:</th>
-                    <th>S.O.:</th>
-                    <th>Especialización:</th>--->
-                    <th>Fecha Inicio:</th>
-                    <th>Fecha Fin:</th>
-                    <th>Hora Inicio:</th>
-                    <th>Hora Fin:</th>
-                    <th>Realizada por:</th>
-                    <th>Imparte:</th>
-                    <th>Grupo:</th>
-                    <th>Periodo:</th>
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Preferencia</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Fin</th>
+                    <th>Realizada por</th>
+                    <th>Imparte</th>
+                    <th>Grupo</th>
+                    <th>Período</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for r in requests %}
-                <tr>
-                    <td> <a href="showRequest/{{r.key}}" class="card-link">{{r.code}}</a></td>
+                <tr class="text-center">
+                    <td> <a href="/requests/showRequest/{{r.key}}" class="card-link">{{r.code}}</a></td>
                     <td>{{r.typ}}</td>
                     <td>{{r.preference}}</td>
-                    <!-- <td>{{r.location}}</td>
-                    <td>{{r.specification}}</td>
-                    <td>{{r.num_alum}}</td>
-                    <td>{{r.s_o}}</td>
-                    <td>{{r.specialization}}</td> -->
                     <td>{{r.start_date}}</td>
                     <td>{{r.end_date}}</td>
                     <td>{{r.start_hour}}</td>
@@ -60,13 +94,17 @@
                     <td>{{r.s_g.code}}</td>
                     <td>{{r.per.typ}}</td>
 
-                    <td><a href="editRequest/{{r.key}}" class="btn btn-info">Editar</a></td>
-                    <td><a href="removeRequest/{{r.key}}" class="btn btn-danger">Eliminar</a></td>
+                    <td><a href="/requests/editRequest/{{r.key}}" class="btn btn-info"><i class="fa fa-pencil"></i></a></td>
+                    <td><a href="/requests/removeRequest/{{r.key}}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a href="createRequest/" class="btn btn-success">Nueva petición</a>
+        {%else%}
+        <div class="alert alert-warning" role="alert">
+            No existe ningún registro de peticiones.
+        </div>
+        {%endif%}
     </div>
 </div>
 {% endblock %}

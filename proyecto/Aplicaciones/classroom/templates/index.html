@@ -1,34 +1,74 @@
 {% extends "./plantilla.html" %}
 
-{% block title %} Listado de clases {% endblock %}
+{% block title %} Listado de laboratorios {% endblock %}
+
+{% block navbar_lab %} active {% endblock %}
 
 {% block body %}
-<h2>Lista de clases</h2>
-<div class="row">       
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h6> Importa el fichero Excel: 
-            <input type="file" name="myfile">
-            <button href="importClassroom/", type="submit", class="btn btn-success">Importar</button>
-        </h6>
-    </form>
+<br>
+<h2>Listado de laboratorios</h2>
+<br>
+<div class="row">
+    {% if format %}
+    {% load static%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        El formato del fichero recibido no es correcto
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if missing %}
+    {% load static%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Debe seleccionar un fichero en formato Excel para poder importar su información
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if success %}
+    {% load static%}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Éxito al importar. Se han importado un total de {{num}} laboratorios
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if except %}
+    {% load static%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al importar, verifique que está usando el formato correcto de introducción de datos
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    <div>
+        <h6> Importar fichero Excel: </h6>
+        <form method="POST" enctype="multipart/form-data" class="input-group mb-3">
+            {% csrf_token %}
+            <input class="form-control" type="file" name="myfile" id="myfile">
+            <button href="importClassroom/" type="submit" class="btn btn-primary"><i class="fa fa-file"></i>
+                Importar</button>
+        </form>
+        <a href="createClassroom/" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo laboratorio</a>
+        {% if clases %}
+        <a href="deleteClassrooms/" class="btn btn-danger"><i class="fa fa-trash"></i> Vaciar información</a>
+        {% endif %}
+
+    </div>
     <div class="container mt-4 py-2">
-        <table class="table table-striped">
+        {%if clases%}
+        <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>Número de la clase:</th>
-                    <th>Localización:</th>
-                    <th>Sistema operativo:</th>
-                    <th>Número de ordenadores:</th>
-                    <th>Aforo máximo del aula:</th>
-                    <th>Especialización:</th>
-                    <th>Especificación:</th>
+                <tr class="text-center">
+                    <th>Identificador</th>
+                    <th>Localización</th>
+                    <th>Sistema operativo</th>
+                    <th>Número de ordenadores</th>
+                    <th>Aforo máximo del aula</th>
+                    <th>Especialización</th>
+                    <th>Especificación</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for c in clases %}
-                <tr>
+                <tr class="text-center">
                     <td>{{c.num_class}}</td>
                     <td>{{c.location}}</td>
                     <td>{{c.s_o}}</td>
@@ -36,13 +76,19 @@
                     <td>{{c.capacity}}</td>
                     <td>{{c.specialization}}</td>
                     <td>{{c.specification}}</td>
-                    <td><a href="editClassroom/{{c.num_class}}/{{c.location}}" class="btn btn-info">Editar</a></td>
-                    <td><a href="removeClassroom/{{c.num_class}}/{{c.location}}" class="btn btn-danger">Eliminar</a></td>
+                    <td><a href="editClassroom/{{c.num_class}}/{{c.location}}" class="btn btn-info"><i
+                                class="fa fa-pencil"></i></a></td>
+                    <td><a href="removeClassroom/{{c.num_class}}/{{c.location}}" class="btn btn-danger"><i
+                                class="fa fa-trash"></i></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a href="createClassroom/" class="btn btn-success">Nueva clase</a>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            No existe ningún registro de laboratorios.
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

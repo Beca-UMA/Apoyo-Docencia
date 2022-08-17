@@ -58,15 +58,14 @@ def unique_codes():
 def real_targets(request):
     real_targets = []
     possible_tagets = Classroom.objects.filter(capacity__gte = request.num_alum)
-    # print(f"REQUEST:::{request}, possible_targets:::{possible_tagets}")
     for t in possible_tagets.iterator():
-        if not request.specification in ['No specificated', 'Cualquiera' ]:
+        if not request.specification in ['No especificado', 'Cualquiera', '']:
             if t.specification != request.specification:
                 continue
         if request.s_o != 'Indiferente':
             if t.s_o != request.s_o:
                 continue
-        if 'Cualquier' not in request.location:
+        if not request.location in ['Cualquier','']:
             if t.location != request.location:
                 continue
         real_targets.append(t)

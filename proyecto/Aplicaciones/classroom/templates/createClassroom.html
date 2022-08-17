@@ -1,49 +1,77 @@
 {% extends "./plantilla.html" %}
 
-{% block title %} Listado de clases {% endblock %}
+{% block title %} Creación de laboratorio {% endblock %}
+
+{% block navbar_lab %} active {% endblock %}
 
 {% block body %}
-
+<br>
 <div class="card">
     <div class="card-body">
-        <h2>Nueva clase</h2>
-        Introduce la información sobre el aula.
+        <h2>Nuevo Laboratorio</h2>
+        Introduce la información sobre el laboratorio.
         <div class="container py-4">
             <form action="/newClassroom/" method="POST"> {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" id="id_num_class" name="id_num_class" 
-                    class="form-control" placeholder="Número del laboratorio" minlength="3" required>
+                <div class="form-group mb-3">
+                    <label for="id_num_class">Número de laboratorio</label>
+                    <input type="text" id="id_num_class" name="id_num_class" class="form-control"
+                        placeholder="Identificador del laboratorio. Ejemplo: LAB 3.1.1" minlength="3" required>
                 </div>
-                <div class="form-group">
-                    <input type="text" id="id_location" name="id_location" 
-                    class="form-control" placeholder="Localización" required>
+                <div class="form-group mb-3">
+                    <label for="id_location">Localización</label>
+                    <input type="text" id="id_location" name="id_location" class="form-control"
+                        placeholder="Ubicación del laboratorio" required>
                 </div>
-                <div class="form-group">
-                    <input type="text" id="id_s_o" name="id_s_o" 
-                    class="form-control" placeholder="Sistema operativo" >
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_num_pc" name="id_num_pc" 
-                    class="form-control" min="1" value="30">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_capacity" name="id_capacity" 
-                    class="form-control" placeholder="Aforo máximo" >
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_specialization" name="id_specialization" 
-                    class="form-control" placeholder="Especialización" >
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_specification" name="id_specification" 
-                    class="form-control" placeholder="Especificación">
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_s_o">Sistema operativo</label>
+                            <select class="form-select" name="id_s_o" id="id_s_o">
+                                <option value="Windows">Windows</option>
+                                <option value="MacOS">MacOS</option>
+                                <option value="Linux">Linux</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_num_pc">Número de PCs</label>
+                            <input type="text" id="id_num_pc" name="id_num_pc" class="form-control"
+                                placeholder="Número de PC disponibles" min="1" value="30">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_capacity">Aforo</label>
+                            <input type="text" id="id_capacity" name="id_capacity" class="form-control"
+                                placeholder="Aforo máximo de la sala">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_specialization">Especialización</label>
+                            <input type="text" id="id_specialization" name="id_specialization" class="form-control"
+                                placeholder="Especialización de la sala. Ejemplo: Redes">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="id_specification">Especificación</label>
+                            <input type="text" id="id_specification" name="id_specification" class="form-control"
+                                placeholder="Especificación de la sala. Ejemplo: GPU, Arduino...">
+                        </div>
+                    </div>
                 </div>
+
+                <button type="submit" class="btn btn-success btn-block text-white"><i class="fa fa-plus"></i>
+                    Crear</button>
+
             </form>
         </div>
     </div>
 </div>
+
 {% endblock %}

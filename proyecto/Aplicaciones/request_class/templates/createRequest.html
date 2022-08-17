@@ -1,46 +1,235 @@
 {% extends "./plantilla.html" %}
 
-{% block title %} Listado de clases {% endblock %}
+{% block title %} Creación de petición {% endblock %}
+
+{% block navbar_peticiones %} active {% endblock %}
 
 {% block body %}
-
-<div class="card">
+<br>
+<div class="card mb-3">
     <div class="card-body">
-        <h2>Nueva clase</h2>
-        Introduce la información sobre el aula.
+        <h2>Nueva petición</h2>
+        Introduce la información sobre la petición.
         <div class="container py-4">
-            <form action="/newClassroom/" method="POST"> {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" id="id_num_class" name="id_num_class" 
-                    class="form-control" placeholder="Número del laboratorio" minlength="3" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_location" name="id_location" 
-                    class="form-control" placeholder="Localización" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_s_o" name="id_s_o" 
-                    class="form-control" placeholder="Sistema operativo" >
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_num_pc" name="id_num_pc" 
-                    class="form-control" min="1" value="30">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_capacity" name="id_capacity" 
-                    class="form-control" placeholder="Aforo máximo" >
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_specialization" name="id_specialization" 
-                    class="form-control" placeholder="Especialización" >
-                </div>
-                <div class="form-group">
-                    <input type="text" id="id_specification" name="id_specification" 
-                    class="form-control" placeholder="Especificación">
+            <form action="/requests/newRequest/" method="POST"> {% csrf_token %}
+                <div class="card mb-3">
+                    <h6 class="card-header">Información básica</h6>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="id">ID de solicitud</label>
+                                <input type="number" id="id" name="id" class="form-control" readonly value="{{id}}">
+                            </div>
+                            <div class="col">
+                                <label for="typ">Tipo de solicitud</label>
+                                <select class="form-select" name="typ" id="typ">
+                                    <option value="Reserva semanal">Reserva semanal</option>
+                                    <option value="Reserva de lista de días">Reserva de lista de días</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="card mb-3">
+                    <h6 class="card-header">Información de la asignatura</h6>
+                    <div class="card-body">
+                        <div class="form-group mb-3">
+                            <label for="degree">Grado</label>
+                            <select class="form-select" name="degree" id="degree">
+                                <option value="Grado en Ingeniería Informática">Grado en Ingeniería
+                                    Informática
+                                </option>
+                                <option value="Grado en Ingeniería del Software">Grado en Ingeniería del
+                                    Software
+                                </option>
+                                <option value="Grado en Ingeniería de Computadores">Grado en Ingeniería de
+                                    Computadores</option>
+                                <option value="Grado en Ingeniería de la Salud">Grado en Ingeniería de la
+                                    Salud
+                                </option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" id="name_period" name="name_period" value="Docencia reglada">
+
+                        <div class="form-group mb-3">
+                            <label for="subject">Asignatura</label>
+                            <input type="text" id="subject" name="subject" class="form-control"
+                                placeholder="Nombre de la asignatura que imparte" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="department">Departamento</label>
+                            <input type="text" id="department" name="department" class="form-control"
+                                placeholder="Departamento asociado a la asignatura"
+                                value="Lenguajes y Ciencias de la Computación" required>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="grade">Curso</label>
+                                <input type="number" id="grade" name="grade" class="form-control"
+                                    placeholder="Número de curso" min="1" max="4" required>
+                            </div>
+                            <div class="col">
+                                <label for="letter">Grupo</label>
+                                <input type="text" id="letter" name="letter" class="form-control"
+                                    placeholder="Letra de grupo" required>
+                            </div>
+                            <div class="col">
+                                <label for="code">Subgrupo</label>
+                                <input type="text" id="code" name="code" class="form-control"
+                                    placeholder="Posible subgrupo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <h6 class="card-header">Información docente</h6>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="name_teacher">Profesor encargado</label>
+                                <input type="text" id="name_teacher" name="name_teacher" class="form-control"
+                                    placeholder="Profesor encargado de impartir la asignatura" required>
+                            </div>
+                            <div class="col">
+                                <label for="name_sender">Profesor solicitante</label>
+                                <input type="text" id="name_sender" name="name_sender" class="form-control"
+                                    placeholder="Nombre del profesor solicitante" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="phone">Teléfono</label>
+                                <input type="phone" id="phone" name="phone" class="form-control"
+                                    placeholder="Teléfono de contacto" required>
+                            </div>
+                            <div class="col">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                    placeholder="Email de contacto" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <h6 class="card-header">Período preferente</h6>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="start_date">Fecha de inicio</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="col">
+                                <label for="end_date">Fecha de fin</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control" required>
+                            </div>
+                            <div class="col">
+                                <label for="pref_day">Día</label>
+                                <select class="form-select" name="pref_day" id="pref_day">
+                                    <option value="Lunes">Lunes</option>
+                                    <option value="Martes">Martes</option>
+                                    <option value="Miércoles">Miércoles</option>
+                                    <option value="Jueves">Jueves</option>
+                                    <option value="Viernes">Viernes</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="start_hour">Hora de inicio</label>
+                                <input type="time" id="start_hour" name="start_hour" class="form-control" required>
+                            </div>
+                            <div class="col">
+                                <label for="end_hour">Hora de fin</label>
+                                <input type="time" id="end_hour" name="end_hour" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <h6 class="card-header">Período alternativo</h6>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="start_date_alt">Fecha de inicio</label>
+                                <input type="date" id="start_date_alt" name="start_date_alt" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="end_date_alt">Fecha de fin</label>
+                                <input type="date" id="end_date_alt" name="end_date_alt" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="alternative_day">Día</label>
+                                <select class="form-select" name="alternative_day" id="alternative_day">
+                                    <option value="Lunes">Lunes</option>
+                                    <option value="Martes">Martes</option>
+                                    <option value="Miércoles">Miércoles</option>
+                                    <option value="Jueves">Jueves</option>
+                                    <option value="Viernes">Viernes</option>
+                                    <option value="Sábado">Sábado</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="start_hour_alt">Hora de inicio</label>
+                                <input type="time" id="start_hour_alt" name="start_hour_alt" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="end_hour_alt">Hora de fin</label>
+                                <input type="time" id="end_hour_alt" name="end_hour_alt" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <h6 class="card-header">Información adicional y específica del aula</h6>
+                    <div class="card-body">
+                        <div class="form-group mb-3">
+                            <label for="location">Localización del aula</label>
+                            <input type="text" id="location" name="location" class="form-control"
+                                placeholder="Sede del laboratorio que se pretende asignar">
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="specification">Especificación del aula</label>
+                                <input type="text" id="specification" name="specification" class="form-control"
+                                    placeholder="Especificación concreta del aula solicitida">
+                            </div>
+                            <div class="col">
+                                <label for="specialization">Especialización del aula</label>
+                                <input type="text" id="specialization" name="specialization" class="form-control"
+                                    placeholder="Especialización concreta del aula solicitida">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="num_alum">Número de alumnos</label>
+                                <input type="number" id="num_alum" name="num_alum" class="form-control"
+                                    placeholder="Número de alumnos previstos o matriculados" min="1" required>
+                            </div>
+
+                            <div class="col">
+                                <label for="s_o">Sistema Operativo</label>
+                                <select class="form-select" name="s_o" id="s_o">
+                                    <option value="Indiferente">Indiferente</option>
+                                    <option value="Windows">Windows</option>
+                                    <option value="MacOS">MacOS</option>
+                                    <option value="Linux">Linux</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    <button type="submit" class="btn btn-success btn-block text-white"><i class="fa fa-plus"></i>
+                        Crear</button>
                 </div>
             </form>
         </div>

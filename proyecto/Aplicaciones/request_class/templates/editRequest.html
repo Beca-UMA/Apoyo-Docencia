@@ -2,132 +2,227 @@
 
 {% block title %} Listado de clases {% endblock %}
 
+{% block navbar_peticiones %} active {% endblock %}
+
 {% block body %}
-<div class="row">
-    <h2>Edición de petición</h2>
-    <div class="card">
+<br>
+<div>
+    <div class="card mb-3">
         <div class="card-body">
-            <form action="updateRequest/" method="POST"> {% csrf_token %}
-                <div class="container">
-                    <div class="row align-items-start">
-                    <div class="col">
-                        <h6>Solicitud</h6>
-                        <div class="form-group">
-                            <input type="text" id="code_request" name="code_request" value="{{request.code}}" readonly
-                            class="form-control" placeholder="ID Reresva" minlength="3" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="typ" name="typ" value="{{request.typ}}" readonly
-                            class="form-control" placeholder="Tipo" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="preference" name="preference" value="{{request.preference}}" readonly
-                            class="form-control" placeholder="Preferencia" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="location" name="location" value="{{request.location}}"
-                            class="form-control" placeholder="Localización" >
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="specification" name="specification" value="{{request.specification}}"
-                            class="form-control" placeholder="Especificación">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="num_alum" name="num_alum" value="{{request.num_alum}}"
-                            class="form-control" placeholder="Número de alumnos">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="s_o" name="s_o" value="{{request.s_o}}"
-                            class="form-control" placeholder="Sistema Operativo">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="specialization" name="specialization" value="{{request.specialization}}"
-                            class="form-control" placeholder="Especialización">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="start_date" name="start_date" value="{{request.start_date |date:'Y-m-d'}}"
-                            class="form-control" placeholder="Fecha inicio reserva">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="end_date" name="end_date" value="{{request.end_date|date:'Y-m-d'}}"
-                            class="form-control" placeholder="Fecha fin reserva">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="alternative_day" name="alternative_day" value="{{request.alternative_day}}"
-                            class="form-control" placeholder="Dia">
-                        </div>
-                        <div class="form-group">
-                            <input type="time" id="start_hour" name="start_hour" value="{{request.start_hour|time:'H:i'}}"
-                            class="form-control" placeholder="Hora inicio">
-                        </div>
-                        <div class="form-group">
-                            <input type="time" id="end_hour" name="end_hour" value="{{request.end_hour|time:'H:i'}}"
-                            class="form-control" placeholder="Hora fin">
+            <h2>Edición de petición</h2>
+            <div class="container py-4">
+                <form action="updateRequest/" method="POST"> {% csrf_token %}
+                    <div class="card mb-3">
+                        <h6 class="card-header">Información básica</h6>
+                        <input type="hidden" id="preference" name="preference" value="{{r.preference}}">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="code_request">ID de solicitud</label>
+                                    <input type="number" id="code_request" name="code_request" class="form-control"
+                                        readonly value="{{r.code}}">
+                                </div>
+                                <div class="col">
+                                    <label for="typ">Tipo de solicitud</label>
+                                    <input type="text" id="typ" name="typ" value="{{r.typ}}" readonly
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="year">Año</label>
+                                    <input type="text" id="year" name="year" class="form-control" readonly
+                                        value="{{r.per.year}}">
+                                </div>
+                                <div class="col">
+                                    <label for="name_period">Período</label>
+                                    <input type="text" id="name_period" name="name_period" value="{{r.per.typ}}"
+                                        class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                <div class="col">
-                    <h6>Profesor</h6>
+
+                    <div class="card mb-3">
+                        <h6 class="card-header">Información de la asignatura</h6>
+                        <div class="card-body">
+                            <div class="form-group mb-3">
+                                <label for="degree">Grado</label>
+                                <select class="form-select" name="degree" id="degree">
+                                    <option value="Grado en Ingeniería Informática" {{ica_sel}}>Grado en Ingeniería
+                                        Informática
+                                    </option>
+                                    <option value="Grado en Ingeniería del Software" {{are_sel}}>Grado en Ingeniería del
+                                        Software
+                                    </option>
+                                    <option value="Grado en Ingeniería de Computadores" {{res_sel}}>Grado en Ingeniería
+                                        de
+                                        Computadores</option>
+                                    <option value="Grado en Ingeniería de la Salud" {{lud_sel}}>Grado en Ingeniería de
+                                        la
+                                        Salud
+                                    </option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" id="name_period" name="name_period" value="Docencia reglada">
+
+                            <div class="form-group mb-3">
+                                <label for="subject">Asignatura</label>
+                                <input type="text" id="subject" name="subject" class="form-control"
+                                    placeholder="Nombre de la asignatura que imparte" value="{{r.s_g.subject}}"
+                                    required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="department">Departamento</label>
+                                <input type="text" id="department" name="department" class="form-control"
+                                    placeholder="Departamento asociado a la asignatura"
+                                    value="{{r.imparter.department}}" required>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="grade">Curso</label>
+                                    <input type="number" id="grade" name="grade" class="form-control"
+                                        placeholder="Número de curso" min="1" max="4" required value="{{r.s_g.grade}}">
+                                </div>
+                                <div class="col">
+                                    <label for="letter">Grupo</label>
+                                    <input type="text" id="letter" name="letter" class="form-control"
+                                        placeholder="Letra de grupo" value="{{r.s_g.letter}}" required>
+                                </div>
+                                <div class="col">
+                                    <label for="group">Subgrupo</label>
+                                    <input type="text" id="group" name="group" class="form-control"
+                                        placeholder="Posible subgrupo" value="{{r.s_g.code}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <h6 class="card-header">Información docente</h6>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="name_teacher">Profesor encargado</label>
+                                    <input type="text" id="name_teacher" name="name_teacher" class="form-control"
+                                        placeholder="Profesor encargado de impartir la asignatura"
+                                        value="{{r.imparter.name}}" required>
+                                </div>
+                                <div class="col">
+                                    <label for="name_sender">Profesor solicitante</label>
+                                    <input type="text" id="name_sender" name="name_sender" class="form-control" readonly
+                                        placeholder="Nombre del profesor solicitante" value="{{r.sender.name}}"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="phone">Teléfono</label>
+                                    <input type="phone" id="phone" name="phone" class="form-control"
+                                        placeholder="Teléfono de contacto" value="{{r.imparter.phone}}" required>
+                                </div>
+                                <div class="col">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        placeholder="Email de contacto" value="{{r.imparter.email}}" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <h6 class="card-header">Período de reserva</h6>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="start_date">Fecha de inicio</label>
+                                    <input type="date" id="start_date" name="start_date" class="form-control"
+                                        value="{{r.start_date |date:'Y-m-d'}}" required>
+                                </div>
+                                <div class="col">
+                                    <label for="end_date">Fecha de fin</label>
+                                    <input type="date" id="end_date" name="end_date" class="form-control"
+                                        value="{{r.end_date |date:'Y-m-d'}}" required>
+                                </div>
+                                <div class="col">
+                                    <label for="alternative_day">Día</label>
+                                    <select class="form-select" name="alternative_day" id="alternative_day">
+                                        <option value="Lunes" {{Lu_sel}}>Lunes</option>
+                                        <option value="Martes" {{Ma_sel}}>Martes</option>
+                                        <option value="Miércoles" {{Mi_sel}}>Miércoles</option>
+                                        <option value="Jueves" {{Ju_sel}}>Jueves</option>
+                                        <option value="Viernes" {{Vi_sel}}>Viernes</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="start_hour">Hora de inicio</label>
+                                    <input type="time" id="start_hour" name="start_hour" class="form-control"
+                                        value="{{r.start_hour|time:'H:i'}}" required>
+                                </div>
+                                <div class="col">
+                                    <label for="end_hour">Hora de fin</label>
+                                    <input type="time" id="end_hour" name="end_hour" class="form-control"
+                                        value="{{r.end_hour|time:'H:i'}}" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <h6 class="card-header">Información adicional y específica del aula</h6>
+                        <div class="card-body">
+                            <div class="form-group mb-3">
+                                <label for="location">Localización del aula</label>
+                                <input type="text" id="location" name="location" class="form-control"
+                                    placeholder="Sede del laboratorio que se pretende asignar" value="{{r.location}}">
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="specification">Especificación del aula</label>
+                                    <input type="text" id="specification" name="specification" class="form-control"
+                                        placeholder="Especificación concreta del aula solicitida"
+                                        value="{{r.specification}}">
+                                </div>
+                                <div class="col">
+                                    <label for="specialization">Especialización del aula</label>
+                                    <input type="text" id="specialization" name="specialization" class="form-control"
+                                        placeholder="Especialización concreta del aula solicitida"
+                                        value="{{r.specialization}}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="num_alum">Número de alumnos</label>
+                                    <input type="number" id="num_alum" name="num_alum" class="form-control"
+                                        placeholder="Número de alumnos previstos o matriculados" min="1"
+                                        value="{{r.num_alum}}" required>
+                                </div>
+
+                                <div class="col">
+                                    <label for="s_o">Sistema Operativo</label>
+                                    <select class="form-select" name="s_o" id="s_o">
+                                        <option value="Indiferente" {{Indiferente_sel}}>Indiferente</option>
+                                        <option value="Windows" {{Windows_sel}}>Windows</option>
+                                        <option value="MacOS" {{MacOS_sel}}>MacOS</option>
+                                        <option value="Linux" {{Linux_sel}}>Linux</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <input type="text" id="name_sender" name="name_sender" value="{{request.sender.name}}" readonly
-                        class="form-control" placeholder="Realizada por">
+                        <button type="submit" class="btn btn-success btn-block text-white"><i
+                                class="fa fa-floppy-o"></i>
+                            Guardar</button>
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="name_teacher" name="name_teacher" value="{{request.imparter.name}}" 
-                        class="form-control" placeholder="Impartida por">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="phone" name="phone" value="{{request.imparter.phone}}" 
-                        class="form-control" placeholder="Teléfono">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="email" name="email" value="{{request.imparter.email}}" 
-                        class="form-control" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="department" name="department" value="{{request.imparter.department}}" 
-                        class="form-control" placeholder="Departamento">
-                    </div>
-                </div>
-                <div class="col">
-                    <h6>Grupo reducido</h6>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" value="{{request.s_g.subject}}" 
-                        class="form-control" placeholder="Asignatura">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="grade" name="grade" value="{{request.s_g.grade}}" 
-                        class="form-control" placeholder="Curso">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="letter" name="letter" value="{{request.s_g.letter}}" 
-                        class="form-control" placeholder="Letra">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="group" name="group" value="{{request.s_g.code}}" 
-                        class="form-control" placeholder="Asignatura">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="degree" name="degree" value="{{request.s_g.degree}}" 
-                        class="form-control" placeholder="Titulación">
-                    </div>
-                </div>
-                <div class="col">
-                    <h6>Periodo</h6>
-                    <div class="form-group">
-                        <input type="text" id="year" name="year" value="{{request.per.year}}" readonly
-                        class="form-control" placeholder="Año">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="name_period" name="name_period" value="{{request.per.typ}}" 
-                        class="form-control" placeholder="Tipo de periodo: 1er Cuatri...">
-                    </div>
-                </div>                
-                </div>
+                </form>
             </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
